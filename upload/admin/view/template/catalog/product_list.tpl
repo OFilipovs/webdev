@@ -41,6 +41,10 @@
                 <label class="control-label" for="input-model"><?php echo $entry_model; ?></label>
                 <input type="text" name="filter_model" value="<?php echo $filter_model; ?>" placeholder="<?php echo $entry_model; ?>" id="input-model" class="form-control" />
               </div>
+              <div class="form-group">
+                <label class="control-label" for="input-category"><?php echo $entry_category; ?></label>
+                <input type="text" name="filter_category" value="<?php echo $filter_category; ?>" placeholder="<?php echo $entry_category; ?>" id="input-category" class="form-control" />
+              </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
@@ -207,6 +211,12 @@ $('#button-filter').on('click', function() {
 		url += '&filter_status=' + encodeURIComponent(filter_status);
 	}
 
+  var filter_category = $('input[name=\'filter_category\']').val();
+
+  if (filter_category) {
+    url += '&filter_category=' + encodeURIComponent(filter_category);
+  }
+
   var filter_image = $('select[name=\'filter_image\']').val();
 
   if (filter_image != '*') {
@@ -256,5 +266,6 @@ $('input[name=\'filter_model\']').autocomplete({
 		$('input[name=\'filter_model\']').val(item['label']);
 	}
 });
+
 //--></script></div>
 <?php echo $footer; ?>

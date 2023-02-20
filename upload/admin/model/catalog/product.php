@@ -347,7 +347,18 @@ class ModelCatalogProduct extends Model {
 			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
-		if (!empty($data['filter_model'])) {
+        if (!empty($data['filter_category'])) {
+            $sql .= " AND p.product_id IN (
+            SELECT product_id FROM " . DB_PREFIX . "product_to_category 
+            WHERE category_id IN (
+                SELECT category_id FROM " . DB_PREFIX . "category_description 
+                WHERE name LIKE '%" . $this->db->escape($data['filter_category']) . "%'
+            )
+            )";
+        }
+
+
+        if (!empty($data['filter_model'])) {
 			$sql .= " AND p.model LIKE '" . $this->db->escape($data['filter_model']) . "%'";
 		}
 
