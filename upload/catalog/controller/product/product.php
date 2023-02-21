@@ -338,6 +338,8 @@ class ControllerProductProduct extends Controller {
                 $discountedPrice = floatval(substr($data['special'], 1));
                 $discountPercentage = round(($regularPrice - $discountedPrice) * 100 / $regularPrice);
                 $data['discount_percentage'] = "Discount: " . $discountPercentage . "%";
+            } else {
+                $data['discount_percentage'] = "";
             }
 
 			$data['options'] = array();
