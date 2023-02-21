@@ -333,6 +333,13 @@ class ControllerProductProduct extends Controller {
 				);
 			}
 
+            if ($data['special']) {
+                $regularPrice = floatval(substr($data['price'], 1));
+                $discountedPrice = floatval(substr($data['special'], 1));
+                $discountPercentage = round(($regularPrice - $discountedPrice) * 100 / $regularPrice);
+                $data['discount_percentage'] = "Discount: " . $discountPercentage . "%";
+            }
+
 			$data['options'] = array();
 
 			foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) {
